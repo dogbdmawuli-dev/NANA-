@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #6a040f, #9d0208);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Segoe UI", sans-serif;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 45px;
+      border-radius: 22px;
+      max-width: 520px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+      animation: fadeIn 2s ease;
+    }
+
+    h1 {
+      font-size: 2.3em;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.15em;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 14px 30px;
+      font-size: 1em;
+      border: none;
+      border-radius: 30px;
+      margin: 12px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .yes {
+      background: #e85d75;
+      color: white;
+    }
+
+    .yes:hover {
+      background: #ff758f;
+      transform: scale(1.12);
+    }
+
+    .no {
+      background: #ffccd5;
+      color: #590d22;
+    }
+
+    .no:hover {
+      transform: translateX(35px);
+    }
+
+    .hint {
+      font-size: 0.85em;
+      opacity: 0.8;
+      margin-top: 10px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body onclick="playMusic()">
+
+  <!-- BACKGROUND MUSIC -->
+  <audio id="bgMusic" loop>
+    <source src="like-real-people-do.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="card" id="card">
+    <h1>Nana Adwoa Agyiewaa ❤️</h1>
+
+    <p>
+      You are the most beautiful woman I have ever seen.<br>
+      Your eyes feel like home.
+    </p>
+
+    <p id="line">
+      “This feels like the moment before everything changes.”
+    </p>
+
+    <h2>Be My Valentine?</h2>
+
+    <button class="yes" onclick="yesAnswer(event)">YES</button>
+    <button class="no" onclick="nextLine(event)">Maybe</button>
+
+    <div class="hint">(tap anywhere 🌙)</div>
+  </div>
+
+  <script>
+    const music = document.getElementById("bgMusic");
+    let started = false;
+
+    function playMusic() {
+      if (!started) {
+        music.volume = 0.6;
+        music.play();
+        started = true;
+      }
+    }
+
+    const lines = [
+      "“Some souls recognize each other quietly.”",
+      "“You feel familiar… in the best way.”",
+      "“This isn’t coincidence. It’s timing.”",
+      "“I’d choose you in every version of this life.”",
+      "“Say yes. Let’s make this real.”"
+    ];
+
+    let i = 0;
+
+    function nextLine(e) {
+      e.stopPropagation();
+      document.getElementById("line").textContent = lines[i];
+      i = (i + 1) % lines.length;
+    }
+
+    function yesAnswer(e) {
+      e.stopPropagation();
+      document.getElementById("card").innerHTML = `
+        <h1>✨ SHE SAID YES ✨</h1>
+        <p>
+          The music softened.<br>
+          Time slowed down.<br>
+          And it was always you.
+        </p>
+        <h2>I love you ❤️</h2>
+        <p>Happy Valentine’s Day, Nana Adwoa Agyiewaa.</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
