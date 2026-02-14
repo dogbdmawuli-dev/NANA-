@@ -15,7 +15,6 @@
       font-family: "Segoe UI", sans-serif;
       color: white;
       text-align: center;
-      cursor: pointer;
     }
 
     .card {
@@ -24,7 +23,7 @@
       border-radius: 22px;
       max-width: 520px;
       box-shadow: 0 30px 60px rgba(0,0,0,0.45);
-      animation: fadeIn 2s ease;
+      animation: fadeIn 1.8s ease;
     }
 
     h1 {
@@ -64,28 +63,17 @@
     }
 
     .no:hover {
-      transform: translateX(35px);
-    }
-
-    .hint {
-      font-size: 0.85em;
-      opacity: 0.8;
-      margin-top: 10px;
+      transform: translateX(30px);
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(25px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 
-<body onclick="playMusic()">
-
-  <!-- BACKGROUND MUSIC -->
-  <audio id="bgMusic" loop>
-    <source src="like-real-people-do.mp3" type="audio/mpeg">
-  </audio>
+<body>
 
   <div class="card" id="card">
     <h1>Nana Adwoa Agyiewaa ❤️</h1>
@@ -101,24 +89,11 @@
 
     <h2>Be My Valentine?</h2>
 
-    <button class="yes" onclick="yesAnswer(event)">YES</button>
-    <button class="no" onclick="nextLine(event)">Maybe</button>
-
-    <div class="hint">(tap anywhere 🌙)</div>
+    <button class="yes" onclick="yesAnswer()">YES</button>
+    <button class="no" onclick="nextLine()">Maybe</button>
   </div>
 
   <script>
-    const music = document.getElementById("bgMusic");
-    let started = false;
-
-    function playMusic() {
-      if (!started) {
-        music.volume = 0.6;
-        music.play();
-        started = true;
-      }
-    }
-
     const lines = [
       "“Some souls recognize each other quietly.”",
       "“You feel familiar… in the best way.”",
@@ -129,20 +104,17 @@
 
     let i = 0;
 
-    function nextLine(e) {
-      e.stopPropagation();
+    function nextLine() {
       document.getElementById("line").textContent = lines[i];
       i = (i + 1) % lines.length;
     }
 
-    function yesAnswer(e) {
-      e.stopPropagation();
+    function yesAnswer() {
       document.getElementById("card").innerHTML = `
         <h1>✨ SHE SAID YES ✨</h1>
         <p>
-          The music softened.<br>
           Time slowed down.<br>
-          And it was always you.
+          Everything felt right.
         </p>
         <h2>I love you ❤️</h2>
         <p>Happy Valentine’s Day, Nana Adwoa Agyiewaa.</p>
